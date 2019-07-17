@@ -45,6 +45,12 @@ irafm.model <- suppressWarnings(glmer(success ~ timeDiff + (timeDiff|`Anon Stude
 ```{r}
 AIC(irafm.model)
 BIC(irafm.model)
+
+stud.params <- data.frame(cbind(row.names(ranef(irafm.model)$`Anon Student Id`), ranef(irafm.model)$`Anon Student Id`[,1], ranef(irafm.model)$`Anon Student Id`[,2]) )
+stud.params <- cbind(Type="Student", stud.params)
+colnames(stud.params) <- c("Type", "Student", "Intercept", "Slope")
+
+stud.params
 ```
 
 
