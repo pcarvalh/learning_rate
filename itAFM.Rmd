@@ -1,0 +1,54 @@
+---
+title: "itAFM"
+output: html_notebook
+---
+
+This file has the basic code to run itAFM on any dataset and plot the result learning curve and output best-fitting parameters.
+
+# Load data. This takes student-step roll up from Datashop (or similar type of file). See datashop for details.
+```{r}
+library(data.table)
+ds_stdstep <- fread("data/ds313_student_step_All_Data_933_2016_0405_131437.txt")
+```
+
+# Calculate difference in time since first step for each student*KC combination
+```{r}
+#order things by student and KC
+ordered_ds_stdstep <- ds_stdstep[order(ds_stdstep$`Anon Student Id`,ds_stdstep$`KC (LFASearchAICWholeModel1)`,ds_stdstep$`Opportunity (LFASearchAICWholeModel1)`)]
+
+#convert time column into time (conveniently)
+ordered_ds_stdstep$`Step Start Time` <- as.POSIXct(ordered_ds_stdstep$`Step Start Time`,format="%Y-%m-%d %H:%M:%S")
+
+#get time for first step in each KC for each student
+library(plyr)
+ordered_ds_stdstep <- ddply(.data = ordered_ds_stdstep,.variables = .(`Anon Student Id`,`KC (LFASearchAICWholeModel1)`),.fun = mutate,first_oppTime =  `Step Start Time`[`Opportunity (LFASearchAICWholeModel1)`==1])
+
+#calculate difference in time from first step
+ordered_ds_stdstep$timeDiff <- difftime(ordered_ds_stdstep$`Step Start Time`,ordered_ds_stdstep$first_oppTime,units="mins")
+
+```
+
+# Use time instead of step in model similar to iAFM/AFM
+```{r}
+
+#convert first attempt to 0 or 1
+ordered_ds_stdstep$success <- ifelse(ordered_ds_stdstep$`First Attempt`=="correct",1,0)
+
+library(lme4)
+library(optimx)
+irafm.model <- suppressWarnings(glmer(success ~ timeDiff + (timeDiff|`Anon Student Id`) + (timeDiff|`KC (LFASearchAICWholeModel1)`), data=ordered_ds_stdstep, family=binomial(),control = glmerControl(optimizer = "optimx", calc.derivs = FALSE,optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE))))
+```
+
+# Graph learning curve (overall)
+
+# Export best-fiffing parameters
+```{r}
+AIC(irafm.model)
+BIC(irafm.model)
+```
+
+
+
+
+
+
