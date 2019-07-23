@@ -57,6 +57,8 @@ df_ordered <- ddply(.data = df_ordered,.variables = .(individual,KC),.fun = muta
 
 #calculate difference in time from first step
 df_ordered$timeDiff <- difftime(df_ordered$time,df_ordered$first_oppTime,units="mins")
+df_ordered$log_timeDiff <- log(as.numeric(df_ordered$timeDiff))
+df_ordered$log_timeDiff <- ifelse(df_ordered$log_timeDiff==-Inf,NA,df_ordered$log_timeDiff)
 
 ```
 
@@ -68,7 +70,7 @@ df_ordered$errorRate <- 1 - df_ordered$success
 
 library(lme4)
 library(optimx)
-irafm.model <- suppressWarnings(glmer(errorRate ~ timeDiff + (timeDiff|individual) + (timeDiff|KC), data=df_ordered, family=binomial(),control = glmerControl(optimizer = "optimx", calc.derivs = FALSE,optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE))))
+irafm.model <- suppressWarnings(glmer(errorRate ~ log_timeDiff + (log_timeDiff|individual) + (log_timeDiff|KC), data=df_ordered, family=binomial(),control = glmerControl(optimizer = "optimx", calc.derivs = FALSE,optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE))))
 ```
 
 # Add new predicted performance to dataset
@@ -80,12 +82,12 @@ df_ordered$prediction <- predict(irafm.model,df_ordered,type="response",allow.ne
 ```{r}
 library(ggplot2)
 df_ordered <- as.data.table(df_ordered)
-df_ordered$time_opp <- round(df_ordered$timeDiff)
-sum_df <- df_ordered[,.(actual_errorRate = mean(errorRate),predicted_errorRate = mean(prediction)),by=time_opp]
+df_ordered$log_timeDiff <- round(df_ordered$log_timeDiff)
+sum_df <- df_ordered[,.(actual_errorRate = mean(errorRate),predicted_errorRate = mean(prediction)),by=log_timeDiff]
 
-sum_df_long <- melt(data = sum_df,id.vars = c("time_opp"),measure.vars = c("actual_errorRate","predicted_errorRate"),variable.name = "typeRate",value.name = "ErrorRate")
+sum_df_long <- melt(data = sum_df,id.vars = c("log_timeDiff"),measure.vars = c("actual_errorRate","predicted_errorRate"),variable.name = "typeRate",value.name = "ErrorRate")
 
-ggplot(data=sum_df_long[sum_df_long$time_opp<100], aes(x=time_opp, y=ErrorRate,shape = typeRate,colour = typeRate)) +
+ggplot(data=sum_df_long, aes(x=log_timeDiff, y=ErrorRate,shape = typeRate,colour = typeRate)) +
   geom_point() + geom_line()
 ```
 
