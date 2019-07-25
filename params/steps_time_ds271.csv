@@ -1,0 +1,325 @@
+individual,KC,n_opp,mean_time_btw_opp
+Stu_03d71ad436fe9aad2884baaf3d09763d,"",,3.76923076923077
+Stu_03d71ad436fe9aad2884baaf3d09763d,"""Single step, Single step, Substitution, Paren""",2,4
+Stu_03d71ad436fe9aad2884baaf3d09763d,"""Single step, Single step, Substitution""",2,4
+Stu_03d71ad436fe9aad2884baaf3d09763d,Single step,8,8.5
+Stu_03d71ad436fe9aad2884baaf3d09763d,Substitution,3,2.5
+Stu_08958a264bc43d9a681f43a8e3b5d789,"",,607.142857142857
+Stu_08958a264bc43d9a681f43a8e3b5d789,"""Single step, Single step, Substitution, Paren""",2,5
+Stu_08958a264bc43d9a681f43a8e3b5d789,"""Single step, Single step, Substitution""",2,11
+Stu_08958a264bc43d9a681f43a8e3b5d789,Single step,8,17.1428571428571
+Stu_08958a264bc43d9a681f43a8e3b5d789,Substitution,3,3.5
+Stu_0cd187059fcf3a7bd14150905de63958,"",,2.2
+Stu_0cd187059fcf3a7bd14150905de63958,"""Single step, Single step, Substitution, Paren""",2,2
+Stu_0cd187059fcf3a7bd14150905de63958,"""Single step, Single step, Substitution""",2,3
+Stu_0cd187059fcf3a7bd14150905de63958,Single step,8,5
+Stu_0cd187059fcf3a7bd14150905de63958,Substitution,3,2
+Stu_141b4f225cd11b19fb52033fb1ad1c69,"",,5.92307692307692
+Stu_141b4f225cd11b19fb52033fb1ad1c69,"""Single step, Single step, Substitution, DoubleRef""",2,3
+Stu_141b4f225cd11b19fb52033fb1ad1c69,"""Substitution, Paren""",2,2
+Stu_141b4f225cd11b19fb52033fb1ad1c69,Single step,8,4.71428571428571
+Stu_141b4f225cd11b19fb52033fb1ad1c69,Substitution,2,2
+Stu_14d37c0fb9b7a0f3e6bf50f0ac9cdbf4,"",,4.85714285714286
+Stu_14d37c0fb9b7a0f3e6bf50f0ac9cdbf4,"""Single step, Single step, Substitution, Paren""",2,8
+Stu_14d37c0fb9b7a0f3e6bf50f0ac9cdbf4,"""Single step, Single step, Substitution""",2,8
+Stu_14d37c0fb9b7a0f3e6bf50f0ac9cdbf4,Single step,8,8.14285714285714
+Stu_14d37c0fb9b7a0f3e6bf50f0ac9cdbf4,Substitution,3,8.5
+Stu_1694d71d31a59a2a3f351f1c35790412,"",,805.428571428572
+Stu_1694d71d31a59a2a3f351f1c35790412,"""Single step, Single step, Substitution, DoubleRef""",2,2
+Stu_1694d71d31a59a2a3f351f1c35790412,"""Substitution, Paren""",2,1405
+Stu_1694d71d31a59a2a3f351f1c35790412,Single step,8,943.666666666667
+Stu_1694d71d31a59a2a3f351f1c35790412,Substitution,2,7
+Stu_1a76da652b3853440ce1c8789d85ef79,"",,11.4
+Stu_1a76da652b3853440ce1c8789d85ef79,"""Single step, Single step, Substitution, DoubleRef""",2,10
+Stu_1a76da652b3853440ce1c8789d85ef79,"""Substitution, Paren""",2,9
+Stu_1a76da652b3853440ce1c8789d85ef79,Single step,8,17.5714285714286
+Stu_1a76da652b3853440ce1c8789d85ef79,Substitution,2,6
+Stu_20099f9f7482241e51932b999c512d81,"",,13.5
+Stu_20099f9f7482241e51932b999c512d81,"""Single step, Single step, Substitution, DoubleRef""",2,9
+Stu_20099f9f7482241e51932b999c512d81,"""Substitution, Paren""",2,10
+Stu_20099f9f7482241e51932b999c512d81,Single step,8,15.6666666666667
+Stu_20099f9f7482241e51932b999c512d81,Substitution,2,8
+Stu_2225bed343fe00707c481572b8db7c70,"",,961.533333333333
+Stu_2225bed343fe00707c481572b8db7c70,"""Single step, Single step, Substitution, Paren""",2,1430
+Stu_2225bed343fe00707c481572b8db7c70,"""Single step, Single step, Substitution""",2,1430
+Stu_2225bed343fe00707c481572b8db7c70,Single step,8,832.571428571429
+Stu_2225bed343fe00707c481572b8db7c70,Substitution,3,1428.5
+Stu_24643303525930e30fd0c060634fac92,"",,435.5
+Stu_24643303525930e30fd0c060634fac92,"""Single step, Single step, Substitution, Paren""",2,5
+Stu_24643303525930e30fd0c060634fac92,"""Single step, Single step, Substitution""",2,1299
+Stu_24643303525930e30fd0c060634fac92,Single step,8,188.428571428571
+Stu_24643303525930e30fd0c060634fac92,Substitution,3,1.5
+Stu_2cb311ecc06798a95079b8dea3c0cf32,"",,7.07142857142857
+Stu_2cb311ecc06798a95079b8dea3c0cf32,"""Single step, Single step, Substitution, Paren""",2,3
+Stu_2cb311ecc06798a95079b8dea3c0cf32,"""Single step, Single step, Substitution""",2,7
+Stu_2cb311ecc06798a95079b8dea3c0cf32,Single step,8,5.33333333333333
+Stu_2cb311ecc06798a95079b8dea3c0cf32,Substitution,3,1
+Stu_37393bee94ec9f1beb8be44c77be13c4,"",,6.07692307692308
+Stu_37393bee94ec9f1beb8be44c77be13c4,"""Single step, Single step, Substitution, DoubleRef""",2,2
+Stu_37393bee94ec9f1beb8be44c77be13c4,"""Substitution, Paren""",2,4
+Stu_37393bee94ec9f1beb8be44c77be13c4,Single step,8,10.2857142857143
+Stu_37393bee94ec9f1beb8be44c77be13c4,Substitution,2,4
+Stu_3d366a35d6d8258691b59453baa860cf,"",,11
+Stu_3d366a35d6d8258691b59453baa860cf,"""Single step, Single step, Substitution, DoubleRef""",2,4
+Stu_3d366a35d6d8258691b59453baa860cf,"""Substitution, Paren""",2,7
+Stu_3d366a35d6d8258691b59453baa860cf,Single step,8,8.57142857142857
+Stu_3d366a35d6d8258691b59453baa860cf,Substitution,2,1
+Stu_3fdf4d4184f84f7cab1bff6e507cb207,"",,1.33333333333333
+Stu_3fdf4d4184f84f7cab1bff6e507cb207,"""Single step, Single step, Substitution, DoubleRef""",2,2
+Stu_3fdf4d4184f84f7cab1bff6e507cb207,Single step,8,4.14285714285714
+Stu_3fea539d1c8d781407db4808de9cc1fa,"",,1153.46666666667
+Stu_3fea539d1c8d781407db4808de9cc1fa,"""Single step, Single step, Substitution, DoubleRef""",2,8
+Stu_3fea539d1c8d781407db4808de9cc1fa,"""Substitution, Paren""",2,1424
+Stu_3fea539d1c8d781407db4808de9cc1fa,Single step,8,840
+Stu_3fea539d1c8d781407db4808de9cc1fa,Substitution,2,1424
+Stu_44a40c84c9966fa4004432714602b80a,"",,6.57142857142857
+Stu_44a40c84c9966fa4004432714602b80a,"""Single step, Single step, Substitution, DoubleRef""",2,8
+Stu_44a40c84c9966fa4004432714602b80a,"""Substitution, Paren""",2,10
+Stu_44a40c84c9966fa4004432714602b80a,Single step,8,17.2857142857143
+Stu_44a40c84c9966fa4004432714602b80a,Substitution,2,8
+Stu_5057abfc560b30cd298ac67c16a46542,"",,2.4
+Stu_5057abfc560b30cd298ac67c16a46542,"""Single step, Single step, Substitution, DoubleRef""",2,2
+Stu_5057abfc560b30cd298ac67c16a46542,Single step,8,3.4
+Stu_52d86745af9a702d79dbcec99a875f14,"",,3.85714285714286
+Stu_52d86745af9a702d79dbcec99a875f14,"""Single step, Single step, Substitution, Paren""",2,8
+Stu_52d86745af9a702d79dbcec99a875f14,"""Single step, Single step, Substitution""",2,6
+Stu_52d86745af9a702d79dbcec99a875f14,Single step,8,11.1428571428571
+Stu_52d86745af9a702d79dbcec99a875f14,Substitution,3,6.5
+Stu_5590bcfa40dd66d3ddb01a22b039481d,"",,13.3
+Stu_5590bcfa40dd66d3ddb01a22b039481d,"""Single step, Single step, Substitution, DoubleRef""",2,9
+Stu_5590bcfa40dd66d3ddb01a22b039481d,"""Substitution, Paren""",2,1402
+Stu_5590bcfa40dd66d3ddb01a22b039481d,Single step,8,11.7142857142857
+Stu_571586cc1a1da2186c0dc462b1c61e2b,"""Single step, Single step, Substitution, Paren""",2,5
+Stu_571586cc1a1da2186c0dc462b1c61e2b,"""Single step, Single step, Substitution""",2,2
+Stu_571586cc1a1da2186c0dc462b1c61e2b,Single step,8,4.57142857142857
+Stu_571586cc1a1da2186c0dc462b1c61e2b,Substitution,3,4279
+Stu_58e362ee180f4d39c71eae3be952d678,"",,2
+Stu_58e362ee180f4d39c71eae3be952d678,"""Single step, Single step, Substitution, DoubleRef""",2,5
+Stu_58e362ee180f4d39c71eae3be952d678,Single step,8,7.14285714285714
+Stu_60ae3652196ee1d3adb870599bdce6b8,"",,6.5
+Stu_60ae3652196ee1d3adb870599bdce6b8,"""Single step, Single step, Substitution, DoubleRef""",2,3
+Stu_60ae3652196ee1d3adb870599bdce6b8,"""Substitution, Paren""",2,1
+Stu_60ae3652196ee1d3adb870599bdce6b8,Single step,8,6.42857142857143
+Stu_60ae3652196ee1d3adb870599bdce6b8,Substitution,2,2
+Stu_64d32a448170c9505db7e6f11da5cd62,"",,261.454545454545
+Stu_64d32a448170c9505db7e6f11da5cd62,"""Single step, Single step, Substitution, Paren""",2,9
+Stu_64d32a448170c9505db7e6f11da5cd62,"""Single step, Single step, Substitution""",2,10
+Stu_64d32a448170c9505db7e6f11da5cd62,Single step,8,820.571428571429
+Stu_64d32a448170c9505db7e6f11da5cd62,Substitution,3,9
+Stu_66591b538df0a6ed87ef18e33de6a084,"",,2
+Stu_66591b538df0a6ed87ef18e33de6a084,"""Single step, Single step, Substitution, Paren""",2,8
+Stu_66591b538df0a6ed87ef18e33de6a084,"""Single step, Single step, Substitution""",2,1467
+Stu_66591b538df0a6ed87ef18e33de6a084,Single step,8,216
+Stu_66591b538df0a6ed87ef18e33de6a084,Substitution,3,2
+Stu_6b1fa78955bf3109dd558511c286cf31,"",,9.42857142857143
+Stu_6b1fa78955bf3109dd558511c286cf31,"""Single step, Single step, Substitution, Paren""",2,10
+Stu_6b1fa78955bf3109dd558511c286cf31,"""Single step, Single step, Substitution""",2,9
+Stu_6b1fa78955bf3109dd558511c286cf31,Single step,8,6.71428571428571
+Stu_6b1fa78955bf3109dd558511c286cf31,Substitution,3,710.5
+Stu_717939296459bf18c8375389494fa96a,"",,2
+Stu_717939296459bf18c8375389494fa96a,"""Single step, Single step, Substitution, Paren""",2,5
+Stu_717939296459bf18c8375389494fa96a,"""Single step, Single step, Substitution""",2,5
+Stu_717939296459bf18c8375389494fa96a,Single step,8,1156.85714285714
+Stu_717939296459bf18c8375389494fa96a,Substitution,3,3.5
+Stu_72169165ff043b98f780f12785818e1f,"",,5.57142857142857
+Stu_72169165ff043b98f780f12785818e1f,"""Single step, Single step, Substitution, Paren""",2,8
+Stu_72169165ff043b98f780f12785818e1f,"""Single step, Single step, Substitution""",2,1415
+Stu_72169165ff043b98f780f12785818e1f,Single step,8,821
+Stu_72169165ff043b98f780f12785818e1f,Substitution,3,1416
+Stu_766b426fac4740711669acb19d0c67bf,"",,4.4
+Stu_766b426fac4740711669acb19d0c67bf,"""Single step, Single step, Substitution, DoubleRef""",2,3
+Stu_766b426fac4740711669acb19d0c67bf,Single step,8,4.57142857142857
+Stu_769012f4b11ef13532386e9bdcb2d44d,"",,17.7272727272727
+Stu_769012f4b11ef13532386e9bdcb2d44d,"""Single step, Single step, Substitution, DoubleRef""",2,15
+Stu_769012f4b11ef13532386e9bdcb2d44d,"""Substitution, Paren""",2,9
+Stu_769012f4b11ef13532386e9bdcb2d44d,Single step,8,1625.14285714286
+Stu_769012f4b11ef13532386e9bdcb2d44d,Substitution,2,8
+Stu_77ab38e9199510b77b073be74b49680f,"",,11.7857142857143
+Stu_77ab38e9199510b77b073be74b49680f,"""Single step, Single step, Substitution, DoubleRef""",2,7
+Stu_77ab38e9199510b77b073be74b49680f,Single step,8,9.14285714285714
+Stu_77ab38e9199510b77b073be74b49680f,Substitution,2,1
+Stu_77ab4f58d39a7b3e430217d8b0d38b0e,"",,7
+Stu_77ab4f58d39a7b3e430217d8b0d38b0e,"""Single step, Single step, Substitution, DoubleRef""",2,3
+Stu_77ab4f58d39a7b3e430217d8b0d38b0e,"""Substitution, Paren""",2,14
+Stu_77ab4f58d39a7b3e430217d8b0d38b0e,Single step,8,19.1428571428571
+Stu_77ab4f58d39a7b3e430217d8b0d38b0e,Substitution,2,13
+Stu_7a09e38af928922ab4f9f186328b7bd3,"",,5.66666666666667
+Stu_7a09e38af928922ab4f9f186328b7bd3,"""Single step, Single step, Substitution, DoubleRef""",2,6
+Stu_7a09e38af928922ab4f9f186328b7bd3,Single step,8,10
+Stu_7deccc1c198115c2b69e7e56f8606518,"",,4.14285714285714
+Stu_7deccc1c198115c2b69e7e56f8606518,"""Single step, Single step, Substitution, Paren""",2,11
+Stu_7deccc1c198115c2b69e7e56f8606518,"""Single step, Single step, Substitution""",2,8
+Stu_7deccc1c198115c2b69e7e56f8606518,Single step,8,4940.42857142857
+Stu_7deccc1c198115c2b69e7e56f8606518,Substitution,3,1
+Stu_7e9f00d73ba9261da5f0d0dd4e25eac0,"",,416.571428571429
+Stu_7e9f00d73ba9261da5f0d0dd4e25eac0,"""Single step, Single step, Substitution, DoubleRef""",2,11
+Stu_7e9f00d73ba9261da5f0d0dd4e25eac0,"""Substitution, Paren""",2,3
+Stu_7e9f00d73ba9261da5f0d0dd4e25eac0,Single step,8,218.571428571429
+Stu_7e9f00d73ba9261da5f0d0dd4e25eac0,Substitution,2,1
+Stu_80b55be52068a0fb103ae95df426f43f,"",,8.1
+Stu_80b55be52068a0fb103ae95df426f43f,"""Single step, Single step, Substitution, DoubleRef""",2,4
+Stu_80b55be52068a0fb103ae95df426f43f,"""Substitution, Paren""",2,1
+Stu_80b55be52068a0fb103ae95df426f43f,Single step,8,5.71428571428571
+Stu_84336e774608b5666c36d20acfa1a14b,"",,9.26666666666667
+Stu_84336e774608b5666c36d20acfa1a14b,"""Single step, Single step, Substitution, Paren""",2,10
+Stu_84336e774608b5666c36d20acfa1a14b,"""Single step, Single step, Substitution""",2,10
+Stu_84336e774608b5666c36d20acfa1a14b,Single step,8,16.4285714285714
+Stu_84336e774608b5666c36d20acfa1a14b,Substitution,3,8
+Stu_861f63d397b95d26b3e4c3dd076f8f22,"",,10.1428571428571
+Stu_861f63d397b95d26b3e4c3dd076f8f22,"""Single step, Single step, Substitution, DoubleRef""",2,4
+Stu_861f63d397b95d26b3e4c3dd076f8f22,"""Substitution, Paren""",2,9
+Stu_861f63d397b95d26b3e4c3dd076f8f22,Single step,8,14.4285714285714
+Stu_861f63d397b95d26b3e4c3dd076f8f22,Substitution,2,6
+Stu_8a16736e9d098f7dc7b19a5f53b83179,"",,8.57142857142857
+Stu_8a16736e9d098f7dc7b19a5f53b83179,"""Single step, Single step, Substitution, Paren""",2,16
+Stu_8a16736e9d098f7dc7b19a5f53b83179,"""Single step, Single step, Substitution""",2,7
+Stu_8a16736e9d098f7dc7b19a5f53b83179,Single step,8,9.71428571428571
+Stu_8a16736e9d098f7dc7b19a5f53b83179,Substitution,3,2.5
+Stu_8fc83e1eb0c534beb0d60dc2fecb449c,"",,3.16666666666667
+Stu_8fc83e1eb0c534beb0d60dc2fecb449c,"""Single step, Single step, Substitution, Paren""",2,10
+Stu_8fc83e1eb0c534beb0d60dc2fecb449c,"""Single step, Single step, Substitution""",2,9
+Stu_8fc83e1eb0c534beb0d60dc2fecb449c,Single step,8,12.1666666666667
+Stu_8fc83e1eb0c534beb0d60dc2fecb449c,Substitution,3,6.5
+Stu_915f91ff597164efd06e2264d99a537f,"",,8.5
+Stu_915f91ff597164efd06e2264d99a537f,"""Single step, Single step, Substitution, DoubleRef""",2,4
+Stu_915f91ff597164efd06e2264d99a537f,"""Substitution, Paren""",2,1
+Stu_915f91ff597164efd06e2264d99a537f,Single step,8,11.4285714285714
+Stu_915f91ff597164efd06e2264d99a537f,Substitution,2,1
+Stu_9374e72d660d483a88f2048f79dad35d,"",,874.153846153846
+Stu_9374e72d660d483a88f2048f79dad35d,"""Single step, Single step, Substitution, DoubleRef""",2,5
+Stu_9374e72d660d483a88f2048f79dad35d,"""Substitution, Paren""",2,1
+Stu_9374e72d660d483a88f2048f79dad35d,Single step,8,412.714285714286
+Stu_93ac3e4f007df8b9d681dac2a4767120,"",,4
+Stu_93ac3e4f007df8b9d681dac2a4767120,"""Single step, Single step, Substitution, Paren""",2,4
+Stu_93ac3e4f007df8b9d681dac2a4767120,"""Single step, Single step, Substitution""",2,3
+Stu_93ac3e4f007df8b9d681dac2a4767120,Single step,8,4.28571428571429
+Stu_93ac3e4f007df8b9d681dac2a4767120,Substitution,3,1
+Stu_942ecc4c6d4b30e8f71c723eb395708e,"",,5.66666666666667
+Stu_942ecc4c6d4b30e8f71c723eb395708e,"""Single step, Single step, Substitution, Paren""",2,9
+Stu_942ecc4c6d4b30e8f71c723eb395708e,"""Single step, Single step, Substitution""",2,5
+Stu_942ecc4c6d4b30e8f71c723eb395708e,Single step,8,13.3333333333333
+Stu_942ecc4c6d4b30e8f71c723eb395708e,Substitution,3,6.5
+Stu_9996729393935c098d6c489ee43a125a,"",,4.23076923076923
+Stu_9996729393935c098d6c489ee43a125a,"""Single step, Single step, Substitution, Paren""",2,4
+Stu_9996729393935c098d6c489ee43a125a,"""Single step, Single step, Substitution""",2,4
+Stu_9996729393935c098d6c489ee43a125a,Single step,8,3.33333333333333
+Stu_9996729393935c098d6c489ee43a125a,Substitution,3,3
+Stu_9c9231facc5b521986a147aa91d3a58d,"",,5
+Stu_9c9231facc5b521986a147aa91d3a58d,"""Single step, Single step, Substitution, DoubleRef""",2,3
+Stu_9c9231facc5b521986a147aa91d3a58d,Single step,8,1340.42857142857
+Stu_9c9231facc5b521986a147aa91d3a58d,Substitution,2,1
+Stu_a19085a73ad00d2af1d5f6f3eb798a36,"",,3.5
+Stu_a19085a73ad00d2af1d5f6f3eb798a36,"""Single step, Single step, Substitution, Paren""",2,7
+Stu_a19085a73ad00d2af1d5f6f3eb798a36,"""Single step, Single step, Substitution""",2,5
+Stu_a19085a73ad00d2af1d5f6f3eb798a36,Single step,8,5.66666666666667
+Stu_a19085a73ad00d2af1d5f6f3eb798a36,Substitution,3,1
+Stu_a3f0adfd565fcdf1980a23c41b47496f,"",,3486.9
+Stu_a3f0adfd565fcdf1980a23c41b47496f,"""Single step, Single step, Substitution, Paren""",2,4352
+Stu_a3f0adfd565fcdf1980a23c41b47496f,"""Single step, Single step, Substitution""",2,4354
+Stu_a3f0adfd565fcdf1980a23c41b47496f,Single step,8,2912.33333333333
+Stu_a3f0adfd565fcdf1980a23c41b47496f,Substitution,3,2180.5
+Stu_a6fca1f4fb5e7567dcba15ea1cca52e3,"",,5.55555555555556
+Stu_a6fca1f4fb5e7567dcba15ea1cca52e3,"""Single step, Single step, Substitution, DoubleRef""",2,1
+Stu_a6fca1f4fb5e7567dcba15ea1cca52e3,"""Substitution, Paren""",2,1
+Stu_a6fca1f4fb5e7567dcba15ea1cca52e3,Single step,8,5
+Stu_a6fca1f4fb5e7567dcba15ea1cca52e3,Substitution,2,1519
+Stu_a90ad61b835db06763aa21847887424c,"",,3.66666666666667
+Stu_a90ad61b835db06763aa21847887424c,"""Single step, Single step, Substitution, DoubleRef""",2,4
+Stu_a90ad61b835db06763aa21847887424c,"""Substitution, Paren""",2,4
+Stu_a90ad61b835db06763aa21847887424c,Single step,8,7.6
+Stu_a90ad61b835db06763aa21847887424c,Substitution,2,2
+Stu_af9db68d000dba6ecb5ec0db80c0a082,"""Single step, Single step, Substitution, Paren""",2,10
+Stu_af9db68d000dba6ecb5ec0db80c0a082,"""Single step, Single step, Substitution""",2,2
+Stu_af9db68d000dba6ecb5ec0db80c0a082,Single step,8,10.1428571428571
+Stu_af9db68d000dba6ecb5ec0db80c0a082,Substitution,3,3
+Stu_b0072de92c994ccb3297009b4eba8dde,"",,1907.5
+Stu_b0072de92c994ccb3297009b4eba8dde,"""Single step, Single step, Substitution, DoubleRef""",2,1
+Stu_b0072de92c994ccb3297009b4eba8dde,"""Substitution, Paren""",2,2854
+Stu_b0072de92c994ccb3297009b4eba8dde,Single step,8,1638.85714285714
+Stu_b0072de92c994ccb3297009b4eba8dde,Substitution,2,2852
+Stu_b6e4cd53b863214234cc870a7ee76fec,"""Single step, Single step, Substitution, DoubleRef""",2,2
+Stu_b6e4cd53b863214234cc870a7ee76fec,"""Substitution, Paren""",2,2
+Stu_b6e4cd53b863214234cc870a7ee76fec,Single step,8,6.71428571428571
+Stu_b6e4cd53b863214234cc870a7ee76fec,Substitution,2,2
+Stu_b9a114464c6cb3771d6b17c390700b99,"",,15
+Stu_b9a114464c6cb3771d6b17c390700b99,"""Single step, Single step, Substitution, DoubleRef""",2,7
+Stu_b9a114464c6cb3771d6b17c390700b99,"""Substitution, Paren""",2,14
+Stu_b9a114464c6cb3771d6b17c390700b99,Single step,8,20.8333333333333
+Stu_b9a114464c6cb3771d6b17c390700b99,Substitution,2,7
+Stu_bc95553df5b629ed933c2effb211cbfd,"",,7.16666666666667
+Stu_bc95553df5b629ed933c2effb211cbfd,"""Single step, Single step, Substitution, DoubleRef""",2,2
+Stu_bc95553df5b629ed933c2effb211cbfd,Single step,8,413
+Stu_c63fd22015d9c8e22081152d39602d09,"",,597.3
+Stu_c63fd22015d9c8e22081152d39602d09,"""Single step, Single step, Substitution, Paren""",2,5
+Stu_c63fd22015d9c8e22081152d39602d09,"""Single step, Single step, Substitution""",2,1482
+Stu_c63fd22015d9c8e22081152d39602d09,Single step,8,994
+Stu_c63fd22015d9c8e22081152d39602d09,Substitution,3,3.5
+Stu_c9ac22b5cbaba5e19fc369264d340f15,"",,857
+Stu_c9ac22b5cbaba5e19fc369264d340f15,"""Single step, Single step, Substitution, DoubleRef""",2,1420
+Stu_c9ac22b5cbaba5e19fc369264d340f15,"""Substitution, Paren""",2,1
+Stu_c9ac22b5cbaba5e19fc369264d340f15,Single step,8,207
+Stu_c9ac22b5cbaba5e19fc369264d340f15,Substitution,2,1
+Stu_d81cc16d6d42d5f556987b86e43a10fc,"",,3.42857142857143
+Stu_d81cc16d6d42d5f556987b86e43a10fc,"""Single step, Single step, Substitution, Paren""",2,6
+Stu_d81cc16d6d42d5f556987b86e43a10fc,"""Single step, Single step, Substitution""",2,1348
+Stu_d81cc16d6d42d5f556987b86e43a10fc,Single step,8,777.571428571429
+Stu_d81cc16d6d42d5f556987b86e43a10fc,Substitution,3,5.5
+Stu_dbc44ca329b22eee8f4da1e65beb2eab,"",,10.1
+Stu_dbc44ca329b22eee8f4da1e65beb2eab,"""Single step, Single step, Substitution, Paren""",2,9
+Stu_dbc44ca329b22eee8f4da1e65beb2eab,"""Single step, Single step, Substitution""",2,7
+Stu_dbc44ca329b22eee8f4da1e65beb2eab,Single step,8,12
+Stu_dbc44ca329b22eee8f4da1e65beb2eab,Substitution,3,7
+Stu_dd300ffb83edfc2f2ff05f2c0f8e2445,"",,12.1333333333333
+Stu_dd300ffb83edfc2f2ff05f2c0f8e2445,"""Single step, Single step, Substitution, Paren""",2,13
+Stu_dd300ffb83edfc2f2ff05f2c0f8e2445,"""Single step, Single step, Substitution""",2,15
+Stu_dd300ffb83edfc2f2ff05f2c0f8e2445,Single step,8,11.4285714285714
+Stu_dd300ffb83edfc2f2ff05f2c0f8e2445,Substitution,3,4.5
+Stu_de7eb17a2d0747c4030107e508dfa946,"",,8.8
+Stu_de7eb17a2d0747c4030107e508dfa946,"""Single step, Single step, Substitution, Paren""",2,12
+Stu_de7eb17a2d0747c4030107e508dfa946,"""Single step, Single step, Substitution""",2,10
+Stu_de7eb17a2d0747c4030107e508dfa946,Single step,8,17.7142857142857
+Stu_de7eb17a2d0747c4030107e508dfa946,Substitution,3,9.5
+Stu_e021801e1c7cfc9dc576d7e7ee5fe54d,"",,3.4
+Stu_e021801e1c7cfc9dc576d7e7ee5fe54d,"""Single step, Single step, Substitution, DoubleRef""",2,2
+Stu_e021801e1c7cfc9dc576d7e7ee5fe54d,"""Substitution, Paren""",2,5
+Stu_e021801e1c7cfc9dc576d7e7ee5fe54d,Single step,8,6.66666666666667
+Stu_e021801e1c7cfc9dc576d7e7ee5fe54d,Substitution,2,2
+Stu_e383da22cdb0f9eda2a2f5e5f7c57437,"",,2.33333333333333
+Stu_e383da22cdb0f9eda2a2f5e5f7c57437,"""Single step, Single step, Substitution, DoubleRef""",2,2
+Stu_e383da22cdb0f9eda2a2f5e5f7c57437,"""Substitution, Paren""",2,3
+Stu_e383da22cdb0f9eda2a2f5e5f7c57437,Single step,8,7
+Stu_e383da22cdb0f9eda2a2f5e5f7c57437,Substitution,2,1
+Stu_ea36995cc28fb99ce60381b1a31e66d6,"",,3
+Stu_ea36995cc28fb99ce60381b1a31e66d6,"""Single step, Single step, Substitution, Paren""",2,6
+Stu_ea36995cc28fb99ce60381b1a31e66d6,"""Single step, Single step, Substitution""",2,4
+Stu_ea36995cc28fb99ce60381b1a31e66d6,Single step,8,9
+Stu_ea36995cc28fb99ce60381b1a31e66d6,Substitution,3,4.5
+Stu_eb41aea7dd555871fe55cc84b80543e9,"",,1266.78571428571
+Stu_eb41aea7dd555871fe55cc84b80543e9,"""Single step, Single step, Substitution, DoubleRef""",2,6
+Stu_eb41aea7dd555871fe55cc84b80543e9,"""Substitution, Paren""",2,1471
+Stu_eb41aea7dd555871fe55cc84b80543e9,Single step,8,854.714285714286
+Stu_eb41aea7dd555871fe55cc84b80543e9,Substitution,2,1470
+Stu_f1e1b535f24dfa1996a83e233b031fb0,"",,352.333333333333
+Stu_f1e1b535f24dfa1996a83e233b031fb0,"""Single step, Single step, Substitution, Paren""",2,3
+Stu_f1e1b535f24dfa1996a83e233b031fb0,"""Single step, Single step, Substitution""",2,2
+Stu_f1e1b535f24dfa1996a83e233b031fb0,Single step,8,2
+Stu_f1e1b535f24dfa1996a83e233b031fb0,Substitution,3,1.5
+Stu_f5e4d97aa7548561ddc18e508bbe276a,"",,1.66666666666667
+Stu_f5e4d97aa7548561ddc18e508bbe276a,"""Single step, Single step, Substitution, Paren""",2,5
+Stu_f5e4d97aa7548561ddc18e508bbe276a,"""Single step, Single step, Substitution""",2,5
+Stu_f5e4d97aa7548561ddc18e508bbe276a,Single step,8,1051.42857142857
+Stu_f5e4d97aa7548561ddc18e508bbe276a,Substitution,3,1.5
+Stu_f65a741519349eeb2e41d32b3eec4c94,"",,6.5
+Stu_f65a741519349eeb2e41d32b3eec4c94,"""Single step, Single step, Substitution, Paren""",2,8
+Stu_f65a741519349eeb2e41d32b3eec4c94,"""Single step, Single step, Substitution""",2,4
+Stu_f65a741519349eeb2e41d32b3eec4c94,Single step,8,8.57142857142857
+Stu_f65a741519349eeb2e41d32b3eec4c94,Substitution,3,4.5
+Stu_f8dd939396f5c183df9c06d29d560786,"",,3.5
+Stu_f8dd939396f5c183df9c06d29d560786,"""Single step, Single step, Substitution, DoubleRef""",2,2
+Stu_f8dd939396f5c183df9c06d29d560786,"""Substitution, Paren""",2,4
+Stu_f8dd939396f5c183df9c06d29d560786,Single step,8,13.4285714285714
+Stu_f8dd939396f5c183df9c06d29d560786,Substitution,2,3
+Stu_fb8fda9c4eb04db4aeefbcd7ae38f5be,"""Single step, Single step, Substitution, Paren""",2,2
+Stu_fb8fda9c4eb04db4aeefbcd7ae38f5be,"""Single step, Single step, Substitution""",2,4
+Stu_fb8fda9c4eb04db4aeefbcd7ae38f5be,Single step,8,4.5
+Stu_fb8fda9c4eb04db4aeefbcd7ae38f5be,Substitution,3,3

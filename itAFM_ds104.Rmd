@@ -1,5 +1,5 @@
 ---
-title: "itAFM ds313"
+title: "itAFM ds104"
 output:
   html_document:
     df_print: paged
@@ -7,23 +7,33 @@ output:
 
 This file has the basic code to run itAFM on any dataset and plot the result learning curve and output best-fitting parameters.
 
-# Load data. This takes student-step roll up from Datashop (or similar type of file). See datashop for details.
+#define things to make the rest of the code run with any dataset
 ```{r}
 #clean environment
 rm(list=ls())
 
+dataset_path <- "ds104_student_step_All_Data_218_2016_0406_071258.txt"
+dataset <- strsplit(dataset_path,"_")[[1]][1]
+
+kcm <- 'KC (Default2)'
+response <- 'First Attempt'
+opportunity <- 'Opportunity (Default2)'
+individual <- 'Anon Student Id'
+time <- 'First Transaction Time'
+prediction <- 'Predicted Error Rate (Default2)'
+
+```
+
+
+
+# Load data. This takes student-step roll up from Datashop (or similar type of file). See datashop for details.
+```{r}
 library(data.table)
-df <- fread("data/ds313_student_step_All_Data_933_2016_0405_131437.txt")
+df <- fread(paste("data",dataset_path,sep = "/"))
 ```
 
 # Some pre-processing to make data easier to inspect/deal with
 ```{r}
-kcm <- 'KC (LFASearchAICWholeModel1)'
-response <- 'First Attempt'
-opportunity <- 'Opportunity (LFASearchAICWholeModel1)'
-individual <- 'Anon Student Id'
-time <- 'First Transaction Time'
-prediction <- 'Predicted Error Rate (LFASearchAICWholeModel1)'
   
 #keep only columns that we care for
 names(df) <- make.names(names(df)) #add the periods instead of spaces
@@ -37,6 +47,8 @@ df$success <- ifelse(df$response=="correct",1,0) #recode response as 0 (incorrec
 
 col_to_keep <- c("response","KC","opportunity","individual","success","time","prediction")
 df_redux <- df[,.SD,.SDcols=col_to_keep]
+#remove NAs
+df_redux <- df_redux[-which(is.na(df_redux$opportunity)),]
 ```
 
 
@@ -56,7 +68,7 @@ library(plyr)
 df_ordered <- ddply(.data = df_ordered,.variables = .(individual,KC),.fun = mutate,first_oppTime =  time[rec_opportunity==1])
 
 #calculate difference in time from first step
-df_ordered$timeDiff <- difftime(df_ordered$time,df_ordered$first_oppTime,units="mins")
+df_ordered$timeDiff <- as.numeric(difftime(df_ordered$time,df_ordered$first_oppTime,units="mins"))
 
 ```
 
@@ -64,11 +76,11 @@ df_ordered$timeDiff <- difftime(df_ordered$time,df_ordered$first_oppTime,units="
 ```{r}
 
 #convert success to errorRate
-df_ordered$errorRate <- 1 - df_ordered$success
+df_ordered$error <- 1 - df_ordered$success
 
 library(lme4)
 library(optimx)
-irafm.model <- suppressWarnings(glmer(errorRate ~ timeDiff + (timeDiff|individual) + (timeDiff|KC), data=df_ordered, family=binomial(),control = glmerControl(optimizer = "optimx", calc.derivs = FALSE,optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE))))
+irafm.model <- suppressWarnings(glmer(success ~ timeDiff + (timeDiff|individual) + (timeDiff|KC), data=df_ordered, family=binomial(),control = glmerControl(optimizer = "optimx", calc.derivs = FALSE,optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE))))
 ```
 
 # Add new predicted performance to dataset
@@ -81,28 +93,41 @@ df_ordered$prediction <- predict(irafm.model,df_ordered,type="response",allow.ne
 library(ggplot2)
 df_ordered <- as.data.table(df_ordered)
 df_ordered$time_opp <- round(df_ordered$timeDiff)
-sum_df <- df_ordered[,.(actual_errorRate = mean(errorRate),predicted_errorRate = mean(prediction)),by=time_opp]
+sum_df <- df_ordered[,.(actual_errorRate = mean(success),predicted_errorRate = mean(prediction)),by=time_opp]
 
 sum_df_long <- melt(data = sum_df,id.vars = c("time_opp"),measure.vars = c("actual_errorRate","predicted_errorRate"),variable.name = "typeRate",value.name = "ErrorRate")
+sum_df_long$ErrorRate = 1 - sum_df_long$ErrorRate
 
 ggplot(data=sum_df_long, aes(x=time_opp, y=ErrorRate,shape = typeRate,colour = typeRate)) +
-  geom_point() + geom_line()
+  geom_point() + geom_line() + xlim(0,100)
 ```
 
 
 # Export best-fitting parameters
 ```{r}
 model_AIC <- AIC(irafm.model)
+model_AIC
 model_BIC <- BIC(irafm.model)
+model_BIC
 model_logLik <- as.numeric(logLik(irafm.model))
+model_logLik
 maineffect_intercept <- fixef(irafm.model)[[1]]
+maineffect_intercept
 maineffect_slope <- fixef(irafm.model)[[2]]
+maineffect_slope
+
+overall.params <- data.frame(cbind(model_AIC,model_BIC,model_logLik,maineffect_intercept,maineffect_slope))
+overall.params
+
+fwrite(overall.params,file = paste("params/","overall.params_",dataset,".csv",sep=""))
+
 
 stud.params <- data.frame(cbind(row.names(ranef(irafm.model)$individual), ranef(irafm.model)$individual[,1], ranef(irafm.model)$individual[,2]) )
 stud.params <- cbind(Type="Student", stud.params)
 colnames(stud.params) <- c("Type", "Student", "Intercept", "Slope")
 
 stud.params
+fwrite(stud.params,file = paste("params/","stud.params_",dataset,".csv",sep=""))
 
 std_slope_variance <- var((as.numeric(as.character(stud.params$Slope))))
 std_intercept_variance <- var((as.numeric(as.character(stud.params$Intercept))))
@@ -122,6 +147,7 @@ kc.params <- cbind(Type="Skill", kc.params)
 colnames(kc.params) <- c("Type", "KC", "Intercept", "Slope")
 
 kc.params
+fwrite(kc.params,file = paste("params/","kc.params_",dataset,".csv",sep=""))
 
 kc_slope_variance <- var((as.numeric(as.character(kc.params$Slope))))
 kc_intercept_variance <- var((as.numeric(as.character(kc.params$Intercept))))
@@ -136,3 +162,11 @@ rownames(kc.parm.var) <- rows
 
 as.data.frame(kc.parm.var)
 ```
+
+# Calculate and export for each student number of opportunities and mean time between steps for each KC
+```{r}
+steps_time <- df_ordered[!time_opp==0,.(n_opp=max(opportunity),mean_time_btw_opp=mean(time_opp)),by=.(individual,KC)]
+
+fwrite(steps_time,file = paste("params/","steps_time_",dataset,".csv",sep=""))
+```
+
