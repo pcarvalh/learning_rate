@@ -47,8 +47,6 @@ df$success <- ifelse(df$response=="correct",1,0) #recode response as 0 (incorrec
 
 col_to_keep <- c("response","KC","opportunity","individual","success","time","prediction")
 df_redux <- df[,.SD,.SDcols=col_to_keep]
-#remove NAs
-df_redux <- df_redux[-which(is.na(df_redux$opportunity)),]
 ```
 
 

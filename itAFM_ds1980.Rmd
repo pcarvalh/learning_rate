@@ -1,5 +1,5 @@
 ---
-title: "itAFM ds271"
+title: "itAFM ds1980"
 output:
   html_document:
     df_print: paged
@@ -12,15 +12,15 @@ This file has the basic code to run itAFM on any dataset and plot the result lea
 #clean environment
 rm(list=ls())
 
-dataset_path <- "ds271_student_step_All_Data_820_2016_0406_072042.txt"
+dataset_path <- "ds1980_student_step_All_Data_3716_2016_1202_145121.txt"
 dataset <- strsplit(dataset_path,"_")[[1]][1]
 
-kcm <- 'KC (Main-KC7-split)'
+kcm <- 'KC (LFASearchAICWholeModel1)'
 response <- 'First Attempt'
-opportunity <- 'Opportunity (Main-KC7-split)'
+opportunity <- 'Opportunity (LFASearchAICWholeModel1)'
 individual <- 'Anon Student Id'
 time <- 'First Transaction Time'
-prediction <- 'Predicted Error Rate (Main-KC7-split)'
+prediction <- 'Predicted Error Rate (LFASearchAICWholeModel1)'
 
 ```
 

@@ -1,5 +1,5 @@
 ---
-title: "itAFM ds271"
+title: "itAFM ds445"
 output:
   html_document:
     df_print: paged
@@ -12,15 +12,15 @@ This file has the basic code to run itAFM on any dataset and plot the result lea
 #clean environment
 rm(list=ls())
 
-dataset_path <- "ds271_student_step_All_Data_820_2016_0406_072042.txt"
+dataset_path <- "ds445_student_step_All_Data_1469_2016_0403_085520.txt"
 dataset <- strsplit(dataset_path,"_")[[1]][1]
 
-kcm <- 'KC (Main-KC7-split)'
+kcm <- 'KC (LFA_AIC_Model0_v2)'
 response <- 'First Attempt'
-opportunity <- 'Opportunity (Main-KC7-split)'
+opportunity <- 'Opportunity (LFA_AIC_Model0_v2)'
 individual <- 'Anon Student Id'
 time <- 'First Transaction Time'
-prediction <- 'Predicted Error Rate (Main-KC7-split)'
+prediction <- 'Predicted Error Rate (LFA_AIC_Model0_v2)'
 
 ```
 
@@ -97,7 +97,7 @@ sum_df_long <- melt(data = sum_df,id.vars = c("time_opp"),measure.vars = c("actu
 sum_df_long$ErrorRate = 1 - sum_df_long$ErrorRate
 
 ggplot(data=sum_df_long, aes(x=time_opp, y=ErrorRate,shape = typeRate,colour = typeRate)) +
-  geom_point() + geom_line() + xlim(0,30)
+  geom_point() + geom_line() + xlim(0,100)
 ```
 
 
@@ -160,11 +160,9 @@ rownames(kc.parm.var) <- rows
 
 as.data.frame(kc.parm.var)
 ```
-
 # Calculate and export for each student number of opportunities and mean time between steps for each KC
 ```{r}
 steps_time <- df_ordered[!time_opp==0,.(n_opp=max(opportunity),mean_time_btw_opp=mean(time_opp)),by=.(individual,KC)]
 
 fwrite(steps_time,file = paste("params/","steps_time_",dataset,".csv",sep=""))
 ```
-

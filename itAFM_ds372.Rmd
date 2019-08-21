@@ -1,5 +1,5 @@
 ---
-title: "itAFM ds271"
+title: "itAFM ds372"
 output:
   html_document:
     df_print: paged
@@ -12,15 +12,15 @@ This file has the basic code to run itAFM on any dataset and plot the result lea
 #clean environment
 rm(list=ls())
 
-dataset_path <- "ds271_student_step_All_Data_820_2016_0406_072042.txt"
+dataset_path <- "ds372_student_step_All_Data_1182_2016_0405_140426.txt"
 dataset <- strsplit(dataset_path,"_")[[1]][1]
 
-kcm <- 'KC (Main-KC7-split)'
+kcm <- 'KC (Default_corrected)'
 response <- 'First Attempt'
-opportunity <- 'Opportunity (Main-KC7-split)'
+opportunity <- 'Opportunity (Default_corrected)'
 individual <- 'Anon Student Id'
 time <- 'First Transaction Time'
-prediction <- 'Predicted Error Rate (Main-KC7-split)'
+prediction <- 'Predicted Error Rate (Default_corrected)'
 
 ```
 
@@ -47,6 +47,8 @@ df$success <- ifelse(df$response=="correct",1,0) #recode response as 0 (incorrec
 
 col_to_keep <- c("response","KC","opportunity","individual","success","time","prediction")
 df_redux <- df[,.SD,.SDcols=col_to_keep]
+#remove NAs if they exist
+#df_redux <- df_redux[-which(is.na(df_redux$opportunity)),]
 ```
 
 
