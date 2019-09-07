@@ -1540,7 +1540,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -1812,7 +1811,7 @@ as.data.frame(kc.parm.var)</code></pre>
 </div>
 <div id="calculate-and-export-for-each-student-number-of-opportunities-and-mean-time-between-steps-for-each-kc" class="section level1">
 <h1>Calculate and export for each student number of opportunities and mean time between steps for each KC</h1>
-<pre class="r"><code>steps_time &lt;- df_ordered[!time_opp==0,.(n_opp=max(opportunity),mean_time_btw_opp=mean(time_opp)),by=.(individual,KC)]
+<pre class="r"><code>steps_time &lt;- df_ordered[!time_opp==0,.(n_opp=max(opportunity),max_time_btw_opp=max(time_opp)),by=.(individual,KC)]
 
 fwrite(steps_time,file = paste(&quot;params/&quot;,&quot;steps_time_&quot;,dataset,&quot;.csv&quot;,sep=&quot;&quot;))</code></pre>
 </div>

@@ -1,5 +1,5 @@
 ---
-title: "itAFM ds1980"
+title: "itAFM ds1935"
 output:
   html_document:
     df_print: paged
@@ -12,15 +12,15 @@ This file has the basic code to run itAFM on any dataset and plot the result lea
 #clean environment
 rm(list=ls())
 
-dataset_path <- "ds1980_student_step_All_Data_3716_2016_1202_145121.txt"
+dataset_path <- "ds1935_student_step_All_Data_3680_2017_0228_022507.txt"
 dataset <- strsplit(dataset_path,"_")[[1]][1]
 
-kcm <- 'KC (LFASearchAICWholeModel1)'
+kcm <- 'KC (LFASearchBICModel1-PVfixed-models uploaded)'
 response <- 'First Attempt'
-opportunity <- 'Opportunity (LFASearchAICWholeModel1)'
+opportunity <- 'Opportunity (LFASearchBICModel1-PVfixed-models uploaded)'
 individual <- 'Anon Student Id'
 time <- 'First Transaction Time'
-prediction <- 'Predicted Error Rate (LFASearchAICWholeModel1)'
+prediction <- 'Predicted Error Rate (LFASearchBICModel1-PVfixed-models uploaded)'
 
 ```
 
@@ -43,10 +43,11 @@ names(df)[which( colnames(df)==make.names(eval(opportunity)) )] <- "opportunity"
 names(df)[which( colnames(df)==make.names(eval(individual)) )] <- "individual" #replace the individualizing factor name with "individual"
 names(df)[which( colnames(df)==make.names(eval(prediction)) )] <- "prediction" #replace the individualizing factor name with "prediction"
 names(df)[which( colnames(df)==make.names(eval(time)) )] <- "time"
-df$success <- ifelse(df$response=="correct",1,0) #recode response as 0 (incorrect) or 1 (correct
+df$success <- ifelse(df$response=="correct",1,0) #recode response as 0 (incorrect) or 1 (correct)
 
 col_to_keep <- c("response","KC","opportunity","individual","success","time","prediction")
 df_redux <- df[,.SD,.SDcols=col_to_keep]
+df_redux <- df_redux[-which(is.na(df_redux$prediction)),]
 ```
 
 
@@ -97,7 +98,7 @@ sum_df_long <- melt(data = sum_df,id.vars = c("time_opp"),measure.vars = c("actu
 sum_df_long$ErrorRate = 1 - sum_df_long$ErrorRate
 
 ggplot(data=sum_df_long, aes(x=time_opp, y=ErrorRate,shape = typeRate,colour = typeRate)) +
-  geom_point() + geom_line() + xlim(0,30)
+  geom_point() + geom_line() + xlim(0,100)
 ```
 
 
@@ -160,11 +161,9 @@ rownames(kc.parm.var) <- rows
 
 as.data.frame(kc.parm.var)
 ```
-
 # Calculate and export for each student number of opportunities and mean time between steps for each KC
 ```{r}
 steps_time <- df_ordered[!time_opp==0,.(n_opp=max(opportunity),max_time_btw_opp=max(time_opp)),by=.(individual,KC)]
 
 fwrite(steps_time,file = paste("params/","steps_time_",dataset,".csv",sep=""))
 ```
-

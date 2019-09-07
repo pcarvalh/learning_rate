@@ -1,39 +1,25 @@
----
-title: "itAFM ds1980"
-output:
-  html_document:
-    df_print: paged
----
-
-This file has the basic code to run itAFM on any dataset and plot the result learning curve and output best-fitting parameters.
-
-#define things to make the rest of the code run with any dataset
-```{r}
+## ------------------------------------------------------------------------
 #clean environment
 rm(list=ls())
 
-dataset_path <- "ds1980_student_step_All_Data_3716_2016_1202_145121.txt"
+dataset_path <- "ds104_student_step_All_Data_218_2016_0406_071258.txt"
 dataset <- strsplit(dataset_path,"_")[[1]][1]
 
-kcm <- 'KC (LFASearchAICWholeModel1)'
+kcm <- 'KC (Default2)'
 response <- 'First Attempt'
-opportunity <- 'Opportunity (LFASearchAICWholeModel1)'
+opportunity <- 'Opportunity (Default2)'
 individual <- 'Anon Student Id'
 time <- 'First Transaction Time'
-prediction <- 'Predicted Error Rate (LFASearchAICWholeModel1)'
-
-```
+prediction <- 'Predicted Error Rate (Default2)'
 
 
 
-# Load data. This takes student-step roll up from Datashop (or similar type of file). See datashop for details.
-```{r}
+## ------------------------------------------------------------------------
 library(data.table)
 df <- fread(paste("data",dataset_path,sep = "/"))
-```
 
-# Some pre-processing to make data easier to inspect/deal with
-```{r}
+
+## ------------------------------------------------------------------------
   
 #keep only columns that we care for
 names(df) <- make.names(names(df)) #add the periods instead of spaces
@@ -47,11 +33,15 @@ df$success <- ifelse(df$response=="correct",1,0) #recode response as 0 (incorrec
 
 col_to_keep <- c("response","KC","opportunity","individual","success","time","prediction")
 df_redux <- df[,.SD,.SDcols=col_to_keep]
-```
+# #remove NAs if they exist
+# if(TRUE %in%is.na(df_redux$opportunity)){df_redux <- df_redux[-which(is.na(df_redux$opportunity)),]}
+# #remove empty KCs
+# if(""%in%unique(df_redux$KC)){
+#   df_redux <- df_redux[-which(df_redux$KC=="")]
+# }
 
 
-# Calculate difference in time since first step for each student*KC combination
-```{r}
+## ------------------------------------------------------------------------
 #convert time column into time (conveniently)
 df_redux$time<- as.POSIXct(df_redux$time,format="%Y-%m-%d %H:%M:%S")
 
@@ -68,10 +58,9 @@ df_ordered <- ddply(.data = df_ordered,.variables = .(individual,KC),.fun = muta
 #calculate difference in time from first step
 df_ordered$timeDiff <- as.numeric(difftime(df_ordered$time,df_ordered$first_oppTime,units="mins"))
 
-```
 
-# Use time instead of step in model similar to iAFM/AFM
-```{r}
+
+## ------------------------------------------------------------------------
 
 #convert success to errorRate
 df_ordered$error <- 1 - df_ordered$success
@@ -79,15 +68,13 @@ df_ordered$error <- 1 - df_ordered$success
 library(lme4)
 library(optimx)
 irafm.model <- suppressWarnings(glmer(success ~ timeDiff + (timeDiff|individual) + (timeDiff|KC), data=df_ordered, family=binomial(),control = glmerControl(optimizer = "optimx", calc.derivs = FALSE,optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE))))
-```
 
-# Add new predicted performance to dataset
-```{r}
+
+## ------------------------------------------------------------------------
 df_ordered$prediction <- predict(irafm.model,df_ordered,type="response",allow.new.levels=TRUE)
-```
 
-# Graph learning curve (overall)
-```{r}
+
+## ------------------------------------------------------------------------
 library(ggplot2)
 df_ordered <- as.data.table(df_ordered)
 df_ordered$time_opp <- round(df_ordered$timeDiff)
@@ -97,12 +84,10 @@ sum_df_long <- melt(data = sum_df,id.vars = c("time_opp"),measure.vars = c("actu
 sum_df_long$ErrorRate = 1 - sum_df_long$ErrorRate
 
 ggplot(data=sum_df_long, aes(x=time_opp, y=ErrorRate,shape = typeRate,colour = typeRate)) +
-  geom_point() + geom_line() + xlim(0,30)
-```
+  geom_point() + geom_line() + xlim(0,100)
 
 
-# Export best-fitting parameters
-```{r}
+## ------------------------------------------------------------------------
 model_AIC <- AIC(irafm.model)
 model_AIC
 model_BIC <- BIC(irafm.model)
@@ -159,12 +144,10 @@ colnames(kc.parm.var) <- cols
 rownames(kc.parm.var) <- rows
 
 as.data.frame(kc.parm.var)
-```
 
-# Calculate and export for each student number of opportunities and mean time between steps for each KC
-```{r}
-steps_time <- df_ordered[!time_opp==0,.(n_opp=max(opportunity),max_time_btw_opp=max(time_opp)),by=.(individual,KC)]
+
+## ------------------------------------------------------------------------
+steps_time <- df_ordered[!time_opp==0,.(n_opp=max(opportunity),mean_time_btw_opp=mean(time_opp)),by=.(individual,KC)]
 
 fwrite(steps_time,file = paste("params/","steps_time_",dataset,".csv",sep=""))
-```
 

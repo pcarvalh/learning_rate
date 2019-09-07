@@ -78,7 +78,9 @@ df_ordered$error <- 1 - df_ordered$success
 
 library(lme4)
 library(optimx)
-irafm.model <- suppressWarnings(glmer(success ~ timeDiff + (timeDiff|individual) + (timeDiff|KC), data=df_ordered, family=binomial(),control = glmerControl(optimizer = "optimx", calc.derivs = FALSE,optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE))))
+#irafm.model <- suppressWarnings(glmer(success ~ timeDiff + (timeDiff|individual) + (timeDiff|KC), data=df_ordered, family=binomial(),control = glmerControl(optimizer = "optimx", calc.derivs = FALSE,optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE))))
+
+irafm.model <- suppressWarnings(glmer(success ~  (1|individual) (timeDiff|individual) + (timeDiff|KC) - 1, data=df_ordered, family=binomial(),control = glmerControl(optimizer = "optimx", calc.derivs = FALSE,optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE))))
 ```
 
 # Add new predicted performance to dataset
@@ -162,7 +164,7 @@ as.data.frame(kc.parm.var)
 ```
 # Calculate and export for each student number of opportunities and mean time between steps for each KC
 ```{r}
-steps_time <- df_ordered[!time_opp==0,.(n_opp=max(opportunity),mean_time_btw_opp=mean(time_opp)),by=.(individual,KC)]
+steps_time <- df_ordered[!time_opp==0,.(n_opp=max(opportunity),max_time_btw_opp=max(time_opp)),by=.(individual,KC)]
 
 fwrite(steps_time,file = paste("params/","steps_time_",dataset,".csv",sep=""))
 ```
