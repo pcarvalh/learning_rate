@@ -11,7 +11,6 @@ Dataset,kcm,ds name,Opportunity,KC,StudentStep
 392,KTskills-Mcontext-single-sep-ind-areas,Geometry Close-The-Loop,Opportunity (KTskills-Mcontext-single-sep-ind-areas),KC (KTskills-Mcontext-single-sep-ind-areas),ds392_student_step_All_Data_1310_2019_0802_022703
 394,LFASearchAICWholeModel1,IWT Self-Explanation Study 3,Opportunity (LFASearchAICWholeModel1),KC (LFASearchAICWholeModel1),ds394_student_step_All_Data_1312_2016_0401_114050
 445,LFA_AIC_Model0_v2,Digital Games for Improving Number Sense,Opportunity (LFA_AIC_Model0_v2),KC (LFA_AIC_Model0_v2),ds445_student_step_All_Data_1469_2016_0403_085520
-1980,LFA_BIC_Model0,OLI Engineering Statics - Fall 2011 - CMU (74 students),Opportunity (LFA_BIC_Model0),KC (LFA_BIC_Model0),ds1980_student_step_All_Data_3716_2016_1202_145121
 562,new_supportType_topic,Rau Fractions Dataset Fall 2011 (condition GF MIX),Opportunity (new_supportType_topic),KC (new_supportType_topic),ds562_student_step_All_Data_1788_2016_0413_074846
 563,new_topic,Rau Fractions Dataset Fall 2011 (condition MGR),Opportunity (new_topic),KC (new_topic),ds563_student_step_All_Data_1789_2016_0413_081655
 564,new_topic,Rau Fractions Dataset Fall 2011 (condition MIX),Opportunity (new_topic),KC (new_topic),ds564_student_step_All_Data_1806_2016_0413_084029
@@ -22,4 +21,3 @@ Dataset,kcm,ds name,Opportunity,KC,StudentStep
 1935,LFASearchBICModel1-PVfixed-models uploaded,OLI STEM Readiness - Spring 2013,Opportunity (LFASearchBICModel1-PVfixed-models uploaded),KC (LFASearchBICModel1-PVfixed-models uploaded),ds1935_student_step_All_Data_3680_2017_0228_022507
 1305,teaTitle,Discovery_forLearnLab_TEI_Feeback_20150713,Opportunity (teaTitle),KC (teaTitle),ds1305_student_step_All_Data_2892_2016_0513_071522
 1330,CCSS standard,Discovery_forLearnLab_Standards_20150714,Opportunity (CCSS standard),KC (CCSS standard),ds1330_student_step_All_Data_2920_2016_0407_103034
-,,,,,
