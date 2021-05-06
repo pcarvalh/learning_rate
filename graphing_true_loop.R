@@ -1,0 +1,85 @@
+#set wd
+rm(list=ls())
+setwd("/Users/paulo/GitRepos/learning_rate/")
+
+#load packages
+library(ggplot2)
+library(lme4)
+library(data.table)
+
+#load functions
+source(file="models_function.R")
+
+#datasets
+datasets = fread("datasets.csv")
+
+for(i in 1:nrow(datasets)){
+  #dataset
+  dataset = datasets$StudentStep[i]
+  kcm = datasets$KC[i]
+  response = "First Attempt"
+  opportunity = datasets$Opportunity[i]
+  individual = "Anon Student Id"
+  
+  m <- iAFM(dataset,kcm,response,opportunity,individual)
+  
+  ds_student <- m$stud.params
+  ds_kc <- m$kc.params
+  ds_overall <- m$overall.params
+  
+  ds_student$Intercept <- as.numeric(as.character(ds_student$Intercept))
+  ds_student$Slope <- as.numeric(as.character(ds_student$Slope))
+  
+  ds_kc$Intercept <- as.numeric(as.character(ds_kc$Intercept))
+  ds_kc$Slope <- as.numeric(as.character(ds_kc$Slope))
+  
+  ds_overall$maineffect_intercept <- as.numeric(as.character(ds_overall$maineffect_intercept))
+  ds_overall$maineffect_slope <- as.numeric(as.character(ds_overall$maineffect_slope))
+  
+  ds_student$Intercept_corre <- ds_student$Intercept + ds_overall$maineffect_intercept
+  ds_student$Slope_corre <- ds_student$Slope + ds_overall$maineffect_slope
+  ds_student$initial_performance <- 1/(1+exp(-ds_student$Intercept_corre))
+  ds_student$med_initial <- median(ds_student$initial_performance)
+  ds_student$x <- median(ds_student$initial_performance)
+  
+  ds_kc$Intercept_corre <- ds_kc$Intercept + ds_overall$maineffect_intercept
+  ds_kc$Slope_corre <- ds_kc$Slope + ds_overall$maineffect_slope
+  ds_kc$initial_performance <- 1/(1+exp(-ds_kc$Intercept_corre))
+  ds_kc$med_initial <- median(ds_kc$initial_performance)
+  
+  df <- as.data.table(m$df)
+  sumdf <- df[,.(success=mean(success)),by=.(opportunity)]
+  sumdf <- sumdf[-which(is.na(sumdf$opportunity)),]
+  sumdf$opportunity <- sumdf$opportunity+1
+  
+  newData <- data.table("opportunity"=c(rep(0,length(unique(df$individual))),rep(1,length(unique(df$individual))),rep(2,length(unique(df$individual))),rep(3,length(unique(df$individual))),rep(4,length(unique(df$individual))),rep(5,length(unique(df$individual))),rep(6,length(unique(df$individual))),rep(7,length(unique(df$individual))),rep(8,length(unique(df$individual))),rep(9,length(unique(df$individual))),rep(10,length(unique(df$individual))),rep(11,length(unique(df$individual))),rep(12,length(unique(df$individual))),rep(13,length(unique(df$individual))),rep(14,length(unique(df$individual))),rep(15,length(unique(df$individual)))),"individual"=rep(unique(df$individual),16),"KC"=rep("new",length(unique(df$individual))*16))
+  
+  newData$pred <-predict(m$model,newData,type="response",allow.new.levels=TRUE,)
+  
+  ggplot(data=newData,
+         aes(opportunity,pred,colour=individual))+
+    theme_bw() + geom_line() + theme(legend.position = "none")
+  
+  newData$pred_lodds <- log(newData$pred/(1-newData$pred))
+  lr_plot <- ggplot(data=newData[newData$opportunity<11,],
+                    aes(opportunity,pred_lodds,shape=individual))+
+    theme_bw() + geom_line() + theme(legend.position = "none") + scale_y_continuous(name = "Performance (Log Odds Scale)", breaks = c(-3,-2,-1,0,1,2,3), labels = c(0.04,0.12,0.27,0.50,0.73,0.88,0.95)) + scale_x_continuous(name = "Opportunity", breaks = c(0,1,2,3,4,5,6,7,8,9,10), labels = c(0,1,2,3,4,5,6,7,8,9,10)) + ggtitle(paste("(B) Student Learning Rate"," (ds",datasets$Dataset[i],")",sep="")) + scale_fill_grey()
+  
+  ggsave(filename = paste("student_lr_ds_",datasets$Dataset[i],".png",sep=""))
+  
+  newData_kc <- data.table("opportunity"=c(rep(0,length(unique(df$KC))),rep(1,length(unique(df$KC))),rep(2,length(unique(df$KC))),rep(3,length(unique(df$KC))),rep(4,length(unique(df$KC))),rep(5,length(unique(df$KC))),rep(6,length(unique(df$KC))),rep(7,length(unique(df$KC))),rep(8,length(unique(df$KC))),rep(9,length(unique(df$KC))),rep(10,length(unique(df$KC))),rep(11,length(unique(df$KC))),rep(12,length(unique(df$KC))),rep(13,length(unique(df$KC))),rep(14,length(unique(df$KC))),rep(15,length(unique(df$KC)))),"KC"=rep(unique(df$KC),16),"individual"=rep("new",length(unique(df$KC))*16))
+  
+  if(""%in%unique(newData_kc$KC)){
+    newData_kc <- newData_kc[-which(newData_kc$KC==""),]
+  }
+  
+  newData_kc$pred <-predict(m$model,newData_kc,type="response",allow.new.levels=TRUE,)
+  
+  newData_kc$pred_lodds <- log(newData_kc$pred/(1-newData_kc$pred))
+  
+  ggplot(data=newData_kc[newData_kc$opportunity<11,],
+         aes(opportunity,pred_lodds,shape=KC))+
+    theme_bw() + geom_line() + theme(legend.position = "none") + scale_y_continuous(name = "Performance (Log Odds Scale)", breaks = c(-3,-2,-1,0,1,2,3), labels = c(0.04,0.12,0.27,0.50,0.73,0.88,0.95),limits = c(-3,3)) + scale_x_continuous(name = "Opportunity", breaks = c(0,1,2,3,4,5,6,7,8,9,10), labels = c(0,1,2,3,4,5,6,7,8,9,10)) + ggtitle(paste("(A) KC Learning Rate"," (ds",datasets$Dataset[i],")",sep=""))
+  
+  ggsave(filename = paste("kc_lr_ds_",datasets$Dataset[i],".png",sep=""))
+}
