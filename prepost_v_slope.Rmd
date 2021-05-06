@@ -1,0 +1,115 @@
+## Import datasets
+```{r}
+library(data.table)
+process_data  <- fread('/Users/paulo/GitRepos/learning_rate/data/pre-postdatasets/ds4555_student_step.txt')
+prepost_data  <- fread('/Users/paulo/GitRepos/learning_rate/data/pre-postdatasets/ds4555_prepost.csv')
+mapping_data  <- fread('/Users/paulo/GitRepos/learning_rate/data/pre-postdatasets/ds4555_mapping.txt')
+```
+
+## Prepare pre-post
+```{r}
+library("tidyverse")
+
+sum_prepost_data  <- prepost_data %>% group_by(Login) %>% summarize(pretest=mean(Pretest,na.rm=TRUE),posttest=mean(Posttest,na.rm=TRUE),post_pre=mean(`Post-Pre`,na.rm=TRUE))
+
+names(sum_prepost_data)[1]  <- "Stu"
+
+sum_prepost_data <- merge(sum_prepost_data,mapping_data)
+```
+
+## Run iAFM
+```{r}
+iAFM  <- function (dataset, kcm, response, opportunity, individual){
+    library(data.table)
+    library(lme4)
+    library(optimx)
+    library(sjstats)
+
+    df = suppressWarnings(fread(file = paste(getwd(), "/data/pre-postdatasets/", 
+        dataset, ".txt", sep = ""), verbose = F))
+    names(df) <- make.names(names(df))
+    names(df)[which(colnames(df) == make.names(eval(kcm)))] <- "KC"
+    names(df)[which(colnames(df) == make.names(eval(response)))] <- "response"
+    names(df)[which(colnames(df) == make.names(eval(opportunity)))] <- "opportunity"
+    names(df)[which(colnames(df) == make.names(eval(individual)))] <- "individual"
+    success <- ifelse(df$response == "correct", 1, 0)
+    df$success <- success
+    df$errorRate <- 1 - success
+    df$opportunity <- df$opportunity - 1
+    rm(success)
+    iafm.model <- suppressWarnings(glmer(success ~ opportunity + 
+        (opportunity | individual) + (opportunity | KC), data = df, 
+        family = binomial(), control = glmerControl(optimizer = "optimx", 
+            calc.derivs = FALSE, optCtrl = list(method = "nlminb", 
+                starttests = FALSE, kkt = FALSE))))
+    stud.params <- data.frame(cbind(row.names(ranef(iafm.model)$individual), 
+        ranef(iafm.model)$individual$"(Intercept)", ranef(iafm.model)$individual$opportunity))
+    stud.params <- cbind(Dataset = strsplit(dataset, split = "_")[[1]][1], 
+        Type = "Student", stud.params)
+    colnames(stud.params) <- c("Dataset", "Type", "Student", 
+        "Intercept", "Slope")
+    kc.params <- data.frame(cbind(row.names(ranef(iafm.model)$KC), 
+        ranef(iafm.model)$KC$"(Intercept)", ranef(iafm.model)$KC$opportunity))
+    kc.params <- cbind(Dataset = strsplit(dataset, split = "_")[[1]][1], 
+        Type = "KC", kc.params)
+    colnames(kc.params) <- c("Dataset", "Type", "KC", "Intercept", 
+        "Slope")
+    model_AIC <- AIC(iafm.model)
+    model_BIC <- BIC(iafm.model)
+    model_logLik <- as.numeric(logLik(iafm.model))
+    maineffect_intercept <- fixef(iafm.model)[[1]]
+    maineffect_slope <- fixef(iafm.model)[[2]]
+    intercept_p <- coef(summary(iafm.model))[1, 4]
+    slope_p <- coef(summary(iafm.model))[2, 4]
+    mad_main <- mse(iafm.model)
+    rmse <- rmse(iafm.model)
+    overall.params <- data.frame(cbind(Dataset = strsplit(dataset, 
+        split = "_")[[1]][1], model_AIC, model_BIC, model_logLik, 
+        maineffect_intercept, maineffect_slope, intercept_p, 
+        slope_p, mad_main, rmse))
+    df$predicted_error_rate <- 1 - predict(iafm.model, df, type = "response", 
+        allow.new.levels = TRUE)
+    return(list(stud.params = stud.params, kc.params = kc.params, 
+        overall.params = overall.params, df = df, model = iafm.model))
+}
+
+model_results  <- iAFM(dataset = "ds4555_student_step",kcm = "KC (Refined_both_conditions)",response = "First Attempt",opportunity = "Opportunity (Refined_both_conditions)",individual = "Anon Student Id")
+
+model_std.params <- model_results$stud.params
+model_kc.params  <- model_results$kc.params
+model_overall  <- model_results$overall.params
+```
+
+## Run variability measures
+```{r}
+#variability in post-pre
+var(sum_prepost_data$post_pre)
+
+#variability in intercept
+var(model_std.params$Intercept)
+
+#variabiliyt in slope
+var(model_std.params$Slope)
+
+```
+
+## Does slope predict prepost?
+```{r}
+names(sum_prepost_data)[5]  <- "Student"
+sum_prepost_data_params  <- merge(sum_prepost_data,model_std.params)
+
+#correlation between pretest and intercept
+cor.test(sum_prepost_data_params$pretest,as.numeric(as.character(sum_prepost_data_params$Intercept)))
+
+#correlation between pre-post change and slope
+cor.test(sum_prepost_data_params$post_pre,as.numeric(as.character(sum_prepost_data_params$Slope)))
+
+#regression predicting post-pre with pretest and slope
+summary(lm(post_pre ~ pretest + as.numeric(as.character(Slope)),data=sum_prepost_data_params))
+
+#regression predicting post-pre with intercept and slope
+summary(lm(post_pre ~ as.numeric(as.character(Intercept)) + as.numeric(as.character(Slope)),data=sum_prepost_data_params))
+
+#regression predicting posttest with intercept and slope
+summary(lm(posttest ~ as.numeric(as.character(Intercept)) + as.numeric(as.character(Slope)),data=sum_prepost_data_params))
+```
