@@ -78,6 +78,7 @@ model_results  <- iAFM(dataset = "ds4555_student_step",kcm = "KC (Refined_both_c
 model_std.params <- model_results$stud.params
 model_kc.params  <- model_results$kc.params
 model_overall  <- model_results$overall.params
+df  <- model_results$df
 ```
 
 ## Run variability measures
@@ -90,26 +91,62 @@ var(model_std.params$Intercept)
 
 #variabiliyt in slope
 var(model_std.params$Slope)
-
 ```
 
 ## Does slope predict prepost?
 ```{r}
+
+#prepare the data
 names(sum_prepost_data)[5]  <- "Student"
 sum_prepost_data_params  <- merge(sum_prepost_data,model_std.params)
+sum_prepost_data_params$Intercept  <- as.numeric(as.character(sum_prepost_data_params$Intercept)) + as.numeric(as.character(model_overall$maineffect_intercept))
+
+sum_prepost_data_params$Slope  <- as.numeric(as.character(sum_prepost_data_params$Slope)) + as.numeric(as.character(model_overall$maineffect_slope))
 
 #correlation between pretest and intercept
-cor.test(sum_prepost_data_params$pretest,as.numeric(as.character(sum_prepost_data_params$Intercept)))
+cor.test(sum_prepost_data_params$pretest,sum_prepost_data_params$Intercept)
+library(ggplot2)
+library(ggpubr)
+
+ggplot(sum_prepost_data_params, aes(x=pretest, y=Intercept)) + geom_point(size=5) + geom_smooth(method=lm,size=3) + theme_bw() + theme(legend.position = "none",text = element_text(size=20)) + scale_y_continuous(name="Intercept") + scale_x_continuous(name="Pretest") + ggtitle("Relation between Pretest and Intercept") + stat_cor(label.x = 0.4, label.y = -2.5) + stat_regline_equation(label.x = 0.4, label.y = -3)
 
 #correlation between pre-post change and slope
-cor.test(sum_prepost_data_params$post_pre,as.numeric(as.character(sum_prepost_data_params$Slope)))
+cor.test(sum_prepost_data_params$post_pre,sum_prepost_data_params$Slope)
+
+ggplot(sum_prepost_data_params, aes(x=post_pre, y=Slope)) + geom_point(size=5) + geom_smooth(method=lm,size=3) + theme_bw() + theme(legend.position = "none",text = element_text(size=20)) + scale_y_continuous(name="Slope") + scale_x_continuous(name="Pretest") + ggtitle("Relation between Post-Pre and Slope") + stat_cor(label.x = -0.2, label.y = -0.016) + stat_regline_equation(label.x = -0.2, label.y = -0.02)
 
 #regression predicting post-pre with pretest and slope
-summary(lm(post_pre ~ pretest + as.numeric(as.character(Slope)),data=sum_prepost_data_params))
+summary(lm(post_pre ~ pretest + Slope,data=sum_prepost_data_params))
 
 #regression predicting post-pre with intercept and slope
-summary(lm(post_pre ~ as.numeric(as.character(Intercept)) + as.numeric(as.character(Slope)),data=sum_prepost_data_params))
+summary(lm(post_pre ~ Intercept + Slope,data=sum_prepost_data_params))
 
 #regression predicting posttest with intercept and slope
-summary(lm(posttest ~ as.numeric(as.character(Intercept)) + as.numeric(as.character(Slope)),data=sum_prepost_data_params))
+summary(lm(posttest ~ Intercept + Slope,data=sum_prepost_data_params))
+```
+
+## Plot slopes
+```{r}
+newData <- data.table("opportunity"=c(rep(0,length(unique(df$individual))),rep(1,length(unique(df$individual))),rep(2,length(unique(df$individual))),rep(3,length(unique(df$individual))),rep(4,length(unique(df$individual))),rep(5,length(unique(df$individual))),rep(6,length(unique(df$individual))),rep(7,length(unique(df$individual))),rep(8,length(unique(df$individual))),rep(9,length(unique(df$individual))),rep(10,length(unique(df$individual))),rep(11,length(unique(df$individual))),rep(12,length(unique(df$individual))),rep(13,length(unique(df$individual))),rep(14,length(unique(df$individual))),rep(15,length(unique(df$individual)))),"individual"=rep(unique(df$individual),16),"KC"=rep("new",length(unique(df$individual))*16))
+
+newData$pred <-predict(model_results$model,newData,type="response",allow.new.levels=TRUE,)
+
+#ggplot(data=newData,
+ #  aes(opportunity,pred,colour=individual))+
+ # theme_bw() + geom_line() + theme(legend.position = "none")
+
+newData$pred_lodds <- log(newData$pred/(1-newData$pred))
+lr_plot <- ggplot(data=newData[newData$opportunity<11,],
+   aes(opportunity,pred_lodds,shape=individual))+
+  theme_bw() + geom_line() + theme(legend.position = "none",text = element_text(size=20)) + scale_y_continuous(name = "Performance (Log Odds Scale)", breaks = c(-3,-2,-1,0,1,2,3), labels = c(0.04,0.12,0.27,0.50,0.73,0.88,0.95)) + scale_x_continuous(name = "Opportunity", breaks = c(0,1,2,3,4,5,6,7,8,9,10), labels = c(0,1,2,3,4,5,6,7,8,9,10)) + ggtitle(paste("(B) Student Learning Rate"," (ds","MEME",")",sep="")) + scale_fill_grey() + coord_cartesian(ylim=c(-3,3))
+lr_plot
+
+dat.long = sum_prepost_data %>% gather("time", "score", -c("post_pre","Stu","Student"))
+
+dat.long$time <- factor(dat.long$time,levels = c("pretest","posttest"))
+
+prepost_plot <- ggplot(data = dat.long,
+   aes(time, score, group = Student)) +
+  theme_bw() + geom_line() + theme(legend.position = "none",text = element_text(size=20)) + scale_fill_grey() + scale_x_discrete(name="Time") + scale_y_continuous(name="Performance") + ggtitle("Student learning from pre to posttest")
+prepost_plot
 ```
