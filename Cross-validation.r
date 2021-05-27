@@ -1,4 +1,4 @@
-cv  <- function(inputFile,folds,repeats,inputFile,kcm,response,opportunity,individual){
+cv  <- function(modelToFit,inputFile,folds,repeats,kcm,response,opportunity,individual){
 
 # needed libraries
 suppressMessages(library(ggplot2))
@@ -9,19 +9,32 @@ suppressMessages(library(lme4))
 suppressMessages(library(data.table))
 
 # Cross-validation
-inputFile = "ds104_student_step_All_Data_218_2016_0406_071258"
-kcm <- "KC (Default2)"
-response <- "First Attempt"
-opportunity <- "Opportunity (Default2)"
-individual <- "Anon Student Id"
-folds =  10
-repeats =  5
+#inputFile = "ds104_student_step_All_Data_218_2016_0406_071258"
+#kcm <- "KC (Default2)"
+#response <- "First Attempt"
+#opportunity <- "Opportunity (Default2)"
+#individual <- "Anon Student Id"
+#folds =  10
+#repeats =  5
 
 # get the model (for testing purposes only)
 source("models_function.R")
 
-m_out <- iAFM(dataset = inputFile, kcm = kcm, response = response, opportunity = opportunity, individual = individual)
-fittedModel  <- m_out$model
+if(modelToFit=="iAFM"){
+  m_out <- iAFM(dataset = inputFile, kcm = kcm, response = response, opportunity = opportunity, individual = individual)
+  fittedModel  <- m_out$model
+}
+
+if(modelToFit=="AFM"){
+    m_out <- AFM(dataset = inputFile, kcm = kcm, response = response, opportunity = opportunity, individual = individual)
+  fittedModel  <- m_out$model
+}
+
+if(modelToFit=="tAFM"){
+  m_out <- tAFM(dataset = inputFile, kcm = kcm, response = response, opportunity = opportunity, individual = individual)
+  fittedModel  <- m_out$model
+}
+
 
 #helper functions
 #compute RMSE
@@ -95,8 +108,8 @@ rmse.vals = c()
 rmse.data.perc = c()
 # Set up doSNOW package for multi-core training. 
 # NOTE - This works on Windows and Mac, unlike doMC
-#cl <- makeCluster(6, type = "SOCK")
-#registerDoSNOW(cl)
+# cl <- makeCluster(6, type = "SOCK")
+# registerDoSNOW(cl)
 
 for (i in 1:(folds*repeats)){
   training<-NULL

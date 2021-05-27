@@ -154,7 +154,7 @@ AFM <- function(dataset, kcm,response,opportunity,individual){
   
   df$predicted_error_rate <- 1-predict(afm.model,df,type="response",allow.new.levels=TRUE)
   
-  return(list(stud.params=stud.params,kc.params=kc.params,overall.params=overall.params,df=df))
+  return(list(stud.params=stud.params,kc.params=kc.params,overall.params=overall.params,df=df,model=afm.model))
 }
 
 tAFM <- function(dataset, kcm,response,opportunity,individual){
@@ -223,7 +223,7 @@ tAFM <- function(dataset, kcm,response,opportunity,individual){
   steps_time <- df[!time_opp==0,.(n_opp=max(opportunity),total_time=max(time_opp)),by=.(individual,KC)]
   steps_time$Dataset <- strsplit(dataset,split = "_")[[1]][1]
   
-  return(list(stud.params=stud.params,kc.params=kc.params,overall.params=overall.params,df=df,steps_time=steps_time))
+  return(list(stud.params=stud.params,kc.params=kc.params,overall.params=overall.params,df=df,steps_time=steps_time,model=tafm.model))
 }
 
 
