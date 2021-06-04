@@ -91,6 +91,25 @@ ds <- ds[!is.na(ds$KC),]
 ds$item.id <- paste(as.character(ds$Problem.Hierarchy), as.character(ds$Problem.Name), as.character(ds$Step.Name), sep=";")
 #str(ds$item.id)
 
+if(modelToFit=="tAFM"){
+  #convert time column into time (conveniently)
+  ds$time<- as.POSIXct(ds$time,format="%Y-%m-%d %H:%M:%S")
+  
+  #order things by student and KC
+  ds <- ds[order(ds$individual,ds$KC,ds$time)]
+  
+  #add new counter of "opportunity". Make sure that only real opportunities are counted, so remove nas for opportunities for KC that are empty for this KC model.
+  setDT(ds)[!is.na(ds$opportunity), rec_opportunity := seq_len(.N), by=rleid(individual,KC)]
+  
+  #get time for first step in each KC for each student
+  library(plyr)
+  ds <- ddply(.data = ds,.variables = .(individual,KC),.fun = mutate,first_oppTime =  time[rec_opportunity==1])
+  
+  #calculate difference in time from first step
+  ds$timeDiff <- as.numeric(as.character(difftime(ds$time,ds$first_oppTime,units="mins")))
+  ds$timeDiff <- ifelse(is.na(ds$timeDiff)&!is.na(ds$rec_opportunity),0,ds$timeDiff)
+}
+
 # Research has shown that 10-fold CV repeated 10 times is the best place to start,
 # Leverage caret to create 100 total folds
 set.seed(2348)
