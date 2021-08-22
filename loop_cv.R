@@ -60,14 +60,14 @@ for(dataset in 1:nrow(dataset_list)){
   tryCatch(
     {
     #function(inputFile,folds,repeats,inputFile,kcm,response,opportunity,individual)
-      cv_iafm <- cv(modelToFit= "AFM",inputFile = dataset_list$StudentStep[dataset],folds=10,repeats=5,kcm = dataset_list$KC[dataset],response = "First Attempt",opportunity = dataset_list$Opportunity[dataset],individual = "Anon Student Id")
+      cv_afm <- cv(modelToFit= "AFM",inputFile = dataset_list$StudentStep[dataset],folds=10,repeats=5,kcm = dataset_list$KC[dataset],response = "First Attempt",opportunity = dataset_list$Opportunity[dataset],individual = "Anon Student Id")
       
       #output the KC model name
-      assign(paste("rmse.vals",dataset_list$Dataset[dataset],sep = "_"),cv_iafm$rmse.vals)
+      assign(paste("rmse.vals",dataset_list$Dataset[dataset],sep = "_"),cv_afm$rmse.vals)
       
-      assign(paste("rmse.data.perc",dataset_list$Dataset[dataset],sep = "_"),cv_iafm$rmse.data.perc)
+      assign(paste("rmse.data.perc",dataset_list$Dataset[dataset],sep = "_"),cv_afm$rmse.data.perc)
       
-      assign(paste("mean.rmse",dataset_list$Dataset[dataset],sep = "_"),cv_iafm$mean.rmse)
+      assign(paste("mean.rmse",dataset_list$Dataset[dataset],sep = "_"),cv_afm$mean.rmse)
       
     },
     error = function(e){
@@ -82,7 +82,7 @@ for(dataset in 1:nrow(dataset_list)){
 
 save(list=ls(),file = "cv_AFM.RData")
 
-#put together all student params for iAFM
+#put together all student params for AFM
 all_dataframes <- sapply(.GlobalEnv, is.numeric) 
 
 all_rmse.vals <- all_dataframes[grepl("rmse.vals", names(all_dataframes))]
