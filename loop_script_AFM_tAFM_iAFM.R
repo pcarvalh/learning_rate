@@ -80,7 +80,6 @@ for(dataset in 1:nrow(dataset_list)){
 
 save(list=ls(),file = "modelFits_AFM.RData")
 
-
 #put together all student params for AFM
 all_dataframes <- sapply(.GlobalEnv, is.data.frame) 
 all_std.parms <- all_dataframes[grepl("std", names(all_dataframes))]
@@ -149,3 +148,5 @@ write.csv(tAFM.params,"tAFM.params.csv",row.names = F)
 steps.time <- all_dataframes[grepl("steps", names(all_dataframes))]
 tAFM.steps.time <- do.call(rbind,mget(names(steps.time)[steps.time]))
 write.csv(tAFM.steps.time,"tAFM.steps_time.csv",row.names = F)
+
+source("loop_cv.R")

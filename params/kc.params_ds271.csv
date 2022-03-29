@@ -1,8 +1,0 @@
-Type,KC,Intercept,Slope
-Skill,"",0.0013010822260131,0.00730371161241054
-Skill,"""Single step, Single step, Substitution, DoubleRef""",-1.40014507814876,-0.0410175771707689
-Skill,"""Single step, Single step, Substitution, Paren""",-0.493229275103398,0.00446809003464484
-Skill,"""Single step, Single step, Substitution""",0.588495528662949,0.00644206827557581
-Skill,"""Substitution, Paren""",-0.565828119685286,0.00784742706619934
-Skill,Single step,1.26137916692906,0.00722430906408383
-Skill,Substitution,0.622565432514286,0.00732431045487258

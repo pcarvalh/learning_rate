@@ -63,7 +63,7 @@ for(i in 1:nrow(datasets)){
   newData$pred_lodds <- log(newData$pred/(1-newData$pred))
   lr_plot <- ggplot(data=newData[newData$opportunity<11,],
                     aes(opportunity,pred_lodds,shape=individual))+
-    theme_bw() + geom_line() + theme(legend.position = "none") + scale_y_continuous(name = "Performance (Log Odds Scale)", breaks = c(-3,-2,-1,0,1,2,3), labels = c(0.04,0.12,0.27,0.50,0.73,0.88,0.95)) + scale_x_continuous(name = "Opportunity", breaks = c(0,1,2,3,4,5,6,7,8,9,10), labels = c(0,1,2,3,4,5,6,7,8,9,10)) + ggtitle(paste("(B) Student Learning Rate"," (ds",datasets$Dataset[i],")",sep="")) + scale_fill_grey()
+    theme_bw() + geom_line() + theme(legend.position = "none") + scale_y_continuous(name = "Performance (Log Odds)", limits=c(-3,3), breaks = c(-3,-2,-1,0,1,2,3), labels = c(0.04,0.12,0.27,0.50,0.73,0.88,0.95)) + scale_x_continuous(name = "Opportunity", limits=c(0,10), breaks = c(0,1,2,3,4,5,6,7,8,9,10), labels = c(0,1,2,3,4,5,6,7,8,9,10)) + ggtitle(paste("(B) Student Learning Rate"," (ds",datasets$Dataset[i],")",sep="")) + theme(text = element_text(size = 30)) 
   
   ggsave(filename = paste("student_lr_ds_",datasets$Dataset[i],".png",sep=""))
   
@@ -79,7 +79,7 @@ for(i in 1:nrow(datasets)){
   
   ggplot(data=newData_kc[newData_kc$opportunity<11,],
          aes(opportunity,pred_lodds,shape=KC))+
-    theme_bw() + geom_line() + theme(legend.position = "none") + scale_y_continuous(name = "Performance (Log Odds Scale)", breaks = c(-3,-2,-1,0,1,2,3), labels = c(0.04,0.12,0.27,0.50,0.73,0.88,0.95),limits = c(-3,3)) + scale_x_continuous(name = "Opportunity", breaks = c(0,1,2,3,4,5,6,7,8,9,10), labels = c(0,1,2,3,4,5,6,7,8,9,10)) + ggtitle(paste("(A) KC Learning Rate"," (ds",datasets$Dataset[i],")",sep=""))
+    theme_bw() + geom_line() + theme(legend.position = "none") + scale_y_continuous(name = "Performance (Log Odds)", breaks = c(-3,-2,-1,0,1,2,3), labels = c(0.04,0.12,0.27,0.50,0.73,0.88,0.95),limits = c(-3,3)) + scale_x_continuous(name = "Opportunity", limits=c(0,10), breaks = c(0,1,2,3,4,5,6,7,8,9,10), labels = c(0,1,2,3,4,5,6,7,8,9,10)) + ggtitle(paste("(A) KC Learning Rate"," (ds",datasets$Dataset[i],")",sep="")) + theme(text = element_text(size = 30)) 
   
   ggsave(filename = paste("kc_lr_ds_",datasets$Dataset[i],".png",sep=""))
 }
